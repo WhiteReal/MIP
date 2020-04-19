@@ -29,11 +29,11 @@ class multiClassInnerProductDecoder(Module):
 
         self.reset_parameters()
 
-    def forward(self, z, node_list, softmax=True):
+    def forward(self, z, softmax=True):
         # value = (z[node_list] * self.weight[node_label]).sum(dim=1)
         # value = torch.sigmoid(value) if sigmoid else value
 
-        pred = torch.matmul(z[node_list], self.weight)
+        pred = torch.matmul(z, self.weight)
         pred = torch.softmax(pred, dim=1) if softmax else pred
 
         return pred
